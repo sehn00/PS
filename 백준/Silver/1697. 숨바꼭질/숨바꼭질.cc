@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int dist[100002];
-
 int main()
 {
     ios::sync_with_stdio(0); cin.tie(0);
@@ -10,7 +8,8 @@ int main()
     int n, k;
     cin >> n >> k;
     
-    fill(dist, dist+100001, -1);
+    int dist[100002];
+    fill(dist, dist+100002, -1);
     
     queue<int> Q;
     Q.push(n);
@@ -20,8 +19,8 @@ int main()
         int cur = Q.front();
         Q.pop();
         
-        for (int next : {cur-1, cur+1, cur*2}) {
-            if (next<0 || next>100000) continue;
+        for (auto next : {cur-1, cur+1, cur*2}) {
+            if (next > 100000 || next < 0) continue;
             if (dist[next] != -1) continue;
             Q.push(next);
             dist[next] = dist[cur] + 1;
@@ -29,5 +28,5 @@ int main()
     }
     cout << dist[k] << '\n';
     
-    return 0;    
+    return 0;
 }
